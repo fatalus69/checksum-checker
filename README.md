@@ -3,9 +3,9 @@ Check if the checksum of a file is valid
 
 ```bash
 # Just run it:
-php checksum-checker.php <filepath> <algo:hash>
+php checksum-checker.php <filepath> <algorithm:hash_checksum>
 
-# Or built the phar archive and run it:
+# Or build the phar archive and run it:
 php scripts/create-phar.php
 ./checksum.phar
 
