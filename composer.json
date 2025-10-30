@@ -1,0 +1,22 @@
+{
+    "name": "fatalus/checksum-checker",
+    "description": "Check if the checksum of a file is valid",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "fatalus\\ChecksumChecker\\": "src/"
+        }, 
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "fatalus69"
+        }
+    ],
+    "require": {
+        "nunomaduro/termwind": "^2.3"
+    }
+}
