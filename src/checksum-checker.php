@@ -5,10 +5,25 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use function fatalus\ChecksumChecker\error;
 use function fatalus\ChecksumChecker\success;
 
-$file = $argv[1];
-$checksum = $argv[2];
+handleArguments($argv);
 
-checkFile($file, $checksum);
+function handleArguments(array $args): void
+{
+    if (count($args) <= 1 || in_array('--help', $args) || in_array('-h', $args)) {
+        echo "Usage: php checksum-checker.php <file> <checksum>".PHP_EOL;
+        echo "Example: php checksum-checker.php /path/to/file.txt sha256:abcdef123456...".PHP_EOL;
+        exit(0);
+    }
+
+    if (count($args) < 3) {
+        error("Usage: php checksum-checker.php <file> <checksum>\nExample: php checksum-checker.php /path/to/file.txt sha256:abcdef123456...");
+    }
+
+    $file = $args[1];
+    $checksum = $args[2];
+   
+    checkFile($file, $checksum);
+}
 
 function checkFile (string $fp, string $checksum)
 {
