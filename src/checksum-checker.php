@@ -33,9 +33,13 @@ function checkFile (string $fp, string $checksum)
         error("File not found or not readable: $fp");
     }
 
+    if (!str_contains($checksum, ':')) {
+        error("Unable to detect checksum. Please use the following format: <algo>:<hash>");
+    }
+
     $checksum = explode(':', trim($checksum));
 
-    //determine algorithm and default to sha256 if not found
+    //determine algorithm and default to sha256 if not known by php 
     $algorithm = in_array(strtolower($checksum[0]), hash_algos())
         ? $checksum[0]
         : 'sha256';
@@ -44,7 +48,7 @@ function checkFile (string $fp, string $checksum)
 
     if ($calculated_checksum === $checksum[1]) {
         success("Checksum matches for file: $fp");
-    } else {
-        error("Checksum does not match for file: $fp");
-    }
+    } 
+
+    error("Checksum does not match for file: $fp");
 }
